@@ -14,5 +14,5 @@ package architecture;
  * {@link Algorithm} can be replaced by another.<br>
  * Algorithm must be placed in owning {@link Manager} in 'components' section. <br>
  */
-public abstract class Algorithm extends GameComponentContainer {
+public abstract class Algorithm extends EngineComponentMapModule {
 }

@@ -4,6 +4,7 @@ import model.Board;
 import model.World;
 import model.WorldSize;
 import architecture.Manager;
+import architecture.PersistenceComponent;
 
 /**
  * Default implementation of {@link WorldManager}.
@@ -21,6 +22,7 @@ public class WorldManagerImpl extends Manager implements WorldManager {
 
 		 World newWorld = new World(worldName, mainBoard, worldSize);
 
+		 PersistenceComponent.worldDao.save(newWorld);
 		 
 	}
 

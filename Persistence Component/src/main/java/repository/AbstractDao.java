@@ -1,9 +1,7 @@
 package repository;
 
-public abstract class AbstractDao <T>{
+public interface AbstractDao<T> {
 
-	public void save(T t) {
-		
-	}
-	
+	void save(T t);
+
 }

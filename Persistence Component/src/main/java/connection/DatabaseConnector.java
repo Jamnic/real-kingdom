@@ -13,13 +13,13 @@ public class DatabaseConnector {
 
 		try {
 			Class.forName(DatabaseConnector.DRIVER);
+			connection = DriverManager.getConnection(DB_URL);
 		} catch (ClassNotFoundException e) {
 			System.err.println("Brak sterownika JDBC");
 			e.printStackTrace();
 		}
 
 		try {
-			connection = DriverManager.getConnection(DB_URL);
 		} catch (SQLException e) {
 			System.err.println("Problem z otwarciem polaczenia");
 			e.printStackTrace();

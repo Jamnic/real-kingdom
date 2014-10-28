@@ -1,11 +1,11 @@
 package game;
 
-import architecture.GameComponentContainer;
+import architecture.EngineComponentMapModule;
 
 /**
  * This is a place, where {@link Game} can be run.
  */
-public final class GameRunner extends GameComponentContainer {
+public final class GameRunner extends EngineComponentMapModule {
 
 	/* ========== Main ========== */
 	public static void main(String[] args) {

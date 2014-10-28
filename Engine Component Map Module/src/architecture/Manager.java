@@ -14,5 +14,5 @@ package architecture;
  * {@link Manager}s should be provided with proper interfaces.<br>
  * <br>
  */
-public abstract class Manager extends GameComponentContainer {
+public abstract class Manager extends EngineComponentMapModule {
 }

@@ -13,5 +13,5 @@ package architecture;
  * {@link GameThread}s should be provided with proper interfaces.<br>
  * <br>
  */
-public abstract class GameThread extends GameComponentContainer {
+public abstract class GameThread extends EngineComponentMapModule {
 }

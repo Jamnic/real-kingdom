@@ -14,5 +14,5 @@ package architecture;
  * It should not have any interface, because it should be kept simple.<br>
  * <br>
  */
-public abstract class Utility extends GameComponentContainer {
+public abstract class Utility extends EngineComponentMapModule {
 }

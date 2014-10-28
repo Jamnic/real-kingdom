@@ -18,20 +18,20 @@ import utilities.LoggerUtility;
  * Every component should be independent during creation.<br>
  * <br>
  */
-public abstract class GameComponentContainer {
+public abstract class EngineComponentMapModule {
 
 	/* Manager */
-	protected final static WorldManager worldManager = new WorldManagerImpl();
-	protected final static BoardManager boardManager = new BoardManagerImpl();
+	public final static WorldManager worldManager = new WorldManagerImpl();
+	public final static BoardManager boardManager = new BoardManagerImpl();
 
 	/* Utility section */
-	protected final static LoggerUtility log = new LoggerUtility(true, true, true, false);
-	protected final static DiceUtility dice = new DiceUtility();
-	protected final static PropertiesReader mapProperties = new PropertiesReader("map.properties");
+	public final static LoggerUtility log = new LoggerUtility(true, true, true, false);
+	public final static DiceUtility dice = new DiceUtility();
+	public final static PropertiesReader mapProperties = new PropertiesReader("map.properties");
 
 	/* GameThread */
-	protected final static Game game = new Game();
-	protected final static MainGameThread mainGameThread = new MainGameThreadImpl();
+	public final static Game game = new Game();
+	public final static MainGameThread mainGameThread = new MainGameThreadImpl();
 
 	// /* Algorithm section */
 	// protected final static RoutingAlgorithm routingAlgorithm = new SimpleRoutingAlgorithmImpl();
