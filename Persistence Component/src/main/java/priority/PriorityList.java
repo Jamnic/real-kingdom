@@ -1,4 +1,4 @@
-package utilities;
+package priority;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,7 +25,7 @@ public class PriorityList<T extends Prioritable> {
 		else
 			return null;
 
-		// TODO obs³uga pustej listy
+		// TODO obsï¿½uga pustej listy
 	}
 
 	public T poll() {
@@ -40,7 +40,7 @@ public class PriorityList<T extends Prioritable> {
 
 		else
 			return null;
-		// TODO obs³uga pustej listy
+		// TODO obsï¿½uga pustej listy
 
 	}
 

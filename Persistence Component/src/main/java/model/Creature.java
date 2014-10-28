@@ -1,10 +1,9 @@
-package engine.model;
+package model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import priority.PriorityList;
 
 import com.google.common.base.Optional;
-
-import engine.utility.PriorityList;
 
 /**
  * 1.0001 Creature

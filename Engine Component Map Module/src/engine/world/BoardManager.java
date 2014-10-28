@@ -1,7 +1,7 @@
 package engine.world;
 
-import engine.model.Board;
-import engine.model.World;
+import model.Board;
+import model.World;
 
 public interface BoardManager {
 

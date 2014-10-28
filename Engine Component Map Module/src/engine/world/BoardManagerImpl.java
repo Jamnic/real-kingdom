@@ -1,7 +1,7 @@
 package engine.world;
 
+import model.Board;
 import architecture.Manager;
-import engine.model.Board;
 import engine.world.algorithm.TerrainGeneratorAlgorithm;
 import engine.world.algorithm.TerrainGeneratorAlgorithmImpl;
 

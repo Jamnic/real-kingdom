@@ -1,4 +1,4 @@
-package engine.model;
+package model;
 
 /**
  * 1.0004 TerrainType

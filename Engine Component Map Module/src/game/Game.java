@@ -1,6 +1,6 @@
 package game;
 
-import engine.model.WorldSize;
+import model.WorldSize;
 import architecture.GameThread;
 
 /**

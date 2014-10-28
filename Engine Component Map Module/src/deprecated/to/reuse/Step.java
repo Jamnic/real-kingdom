@@ -1,6 +1,6 @@
 package deprecated.to.reuse;
 
-import engine.model.Field;
+import model.Field;
 
 public class Step {
 

@@ -1,4 +1,4 @@
-package engine.model;
+package model;
 
 public enum WorldSize {
 

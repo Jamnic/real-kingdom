@@ -1,10 +1,11 @@
 package engine.world;
 
+import model.WorldSize;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import architecture.Manager;
-import engine.model.WorldSize;
 
 public class WorldManagerTest extends Manager {
 

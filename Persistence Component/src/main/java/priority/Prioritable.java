@@ -1,4 +1,4 @@
-package utilities;
+package priority;
 
 public interface Prioritable {
 

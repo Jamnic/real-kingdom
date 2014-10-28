@@ -1,6 +1,7 @@
 package engine.world;
 
-import engine.model.WorldSize;
+import model.World;
+import model.WorldSize;
 
 /**
  * Manages {@link World} entity.

@@ -1,4 +1,4 @@
-package engine.model;
+package model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

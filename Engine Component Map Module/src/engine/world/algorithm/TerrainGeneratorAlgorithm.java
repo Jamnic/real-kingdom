@@ -1,6 +1,6 @@
 package engine.world.algorithm;
 
-import engine.model.Board;
+import model.Board;
 
 public interface TerrainGeneratorAlgorithm {
 

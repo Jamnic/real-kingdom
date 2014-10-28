@@ -1,13 +1,12 @@
 package engine.world.algorithm;
 
+import model.Board;
+import model.Coords;
+import model.Field;
+import model.TerrainType;
 import architecture.Algorithm;
 
 import com.google.common.base.Optional;
-
-import engine.model.Board;
-import engine.model.Coords;
-import engine.model.Field;
-import engine.model.TerrainType;
 
 /**
  * Default implementation of {@link TerrainGeneratorAlgorithm}.

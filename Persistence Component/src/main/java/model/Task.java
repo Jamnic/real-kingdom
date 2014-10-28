@@ -1,8 +1,8 @@
-package engine.model;
+package model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import engine.utility.Prioritable;
-import engine.utility.PriorityType;
+import priority.Prioritable;
+import priority.PriorityType;
 
 /**
  * 1.0005 Task

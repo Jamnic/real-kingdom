@@ -1,14 +1,12 @@
-package engine.model;
+package model;
 
 import java.io.Serializable;
 import java.util.Iterator;
 
-import architecture.GameComponentContainer;
-
 /**
  * Class which helps with iteration over 2D array in {@link Board}.
  */
-public final class BoardIterator extends GameComponentContainer implements Iterator<Field>, Serializable {
+public final class BoardIterator implements Iterator<Field>, Serializable {
 
 	/* ========== Public ========== */
 	/**
@@ -102,16 +100,16 @@ public final class BoardIterator extends GameComponentContainer implements Itera
 
 	private void setCurrentXPositionOfIterator(final int newXPosition) {
 		if (newXPosition < 0 && newXPosition >= iteratedBoard.getWidth())
-			log.err(this.getClass(), "Cannot set currentX to '" + newXPosition
-					+ "'! This value exceeds the size of given board.");
+			// TODO exception
+			return;
 
 		this.currentXPositionOfIterator = newXPosition;
 	}
 
 	private void setCurrentYPositionOfIterator(final int newYPosition) {
 		if (newYPosition < 0 && newYPosition >= iteratedBoard.getHeight())
-			log.err(this.getClass(), "Cannot set currentY to '" + newYPosition
-					+ "'! This value exceeds the size of given board.");
+			// TODO exception
+			return;
 
 		this.currentYPositionOfIterator = newYPosition;
 	}
