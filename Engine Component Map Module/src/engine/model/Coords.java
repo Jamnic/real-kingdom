@@ -1,14 +1,13 @@
 package engine.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import architecture.Entity;
 
 /**
  * 1.0007 Coords
  * 
  * Immutable {@link Coords} class representing coordinates in {@link Board}.
  */
-public class Coords extends Entity {
+public class Coords {
 
 	/* ========== Public ========== */
 	public Coords(int xPosition, int yPosition) {
@@ -30,7 +29,6 @@ public class Coords extends Entity {
 	}
 
 	/* ========== Private ========== */
-	private static final long serialVersionUID = 8455426871491846006L;
 	private final int xPosition;
 	private final int yPosition;
 }

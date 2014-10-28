@@ -6,14 +6,12 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import architecture.Entity;
-
 /**
  * 1.0009 World
  * 
  * Represents couple of {@link Board}'s in one {@link World}.
  */
-public class World extends Entity {
+public class World {
 
 	/* ========== Public ========== */
 	public World(String name, Board mainBoard, WorldSize worldSize) {
@@ -57,7 +55,6 @@ public class World extends Entity {
 	}
 
 	/* ========== Private ========== */
-	private static final long serialVersionUID = -7761384117571253342L;
 	private final String name;
 	private final Board mainBoard;
 	private final List<Board> boards;

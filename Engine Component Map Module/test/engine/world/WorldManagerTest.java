@@ -3,10 +3,8 @@ package engine.world;
 import org.junit.Before;
 import org.junit.Test;
 
-import engine.model.Field;
-import engine.model.World;
-import engine.model.WorldSize;
 import architecture.Manager;
+import engine.model.WorldSize;
 
 public class WorldManagerTest extends Manager {
 
@@ -25,13 +23,7 @@ public class WorldManagerTest extends Manager {
 		WorldSize worldSize = WorldSize.BIG;
 		
 		testedManager.createNewWorld(testName, worldSize);
-		
-		World loadedWorld = worldDao.load();
-		
-		for (Field field : loadedWorld.getMainBoard()) {
-			System.out.println(field.getTerrainType());
-		}
-		
+				
 	}
 	
 	/* ========== Private ========== */

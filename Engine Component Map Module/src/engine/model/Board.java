@@ -4,8 +4,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Iterator;
 
-import architecture.Entity;
-
 import com.google.common.base.Optional;
 
 /**
@@ -13,7 +11,7 @@ import com.google.common.base.Optional;
  * 
  * Represents a play {@link Board} in the game.
  */
-public class Board extends Entity implements Iterable<Field> {
+public class Board implements Iterable<Field> {
 
 	/* ========== Public ========== */
 	public Board(String name, Field[][] board, int width, int height) {
@@ -66,7 +64,6 @@ public class Board extends Entity implements Iterable<Field> {
 	}
 
 	/* ========== Private ========== */
-	private static final long serialVersionUID = -8281069613606799066L;
 	private final String name;
 	private final Field[][] board;
 	private final int height;

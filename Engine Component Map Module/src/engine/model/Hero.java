@@ -8,6 +8,5 @@ public class Hero extends Creature {
 	}
 
 	/* ========== Private ========== */
-	private static final long serialVersionUID = -7379814863895105861L;
 
 }

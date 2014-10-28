@@ -1,7 +1,6 @@
 package engine.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import architecture.Entity;
 
 import com.google.common.base.Optional;
 
@@ -12,7 +11,7 @@ import engine.utility.PriorityList;
  * 
  * Represents a living, movable creature, which can be assigned some tasks to do.
  */
-public class Creature extends Entity {
+public class Creature {
 
 	/* ========== Public ========== */
 	public Creature(String name, Sprite sprite) {
@@ -58,7 +57,6 @@ public class Creature extends Entity {
 	}
 
 	/* ========== Private ========== */
-	private static final long serialVersionUID = -3531933099779430093L;
 	private final String name;
 	private CreatureStatus status;
 	private Optional<Field> occupiedField;

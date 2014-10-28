@@ -1,6 +1,5 @@
 package architecture;
 
-import engine.model.dao.WorldDao;
 import engine.world.BoardManager;
 import engine.world.BoardManagerImpl;
 import engine.world.WorldManager;
@@ -8,9 +7,6 @@ import engine.world.WorldManagerImpl;
 import game.Game;
 import game.MainGameThread;
 import game.MainGameThreadImpl;
-
-import java.io.File;
-
 import properties.PropertiesReader;
 import utilities.DiceUtility;
 import utilities.LoggerUtility;
@@ -23,9 +19,6 @@ import utilities.LoggerUtility;
  * <br>
  */
 public abstract class GameComponentContainer {
-
-	/* Dao */
-	protected final static WorldDao worldDao = new WorldDao(new File("world.rko"));
 
 	/* Manager */
 	protected final static WorldManager worldManager = new WorldManagerImpl();

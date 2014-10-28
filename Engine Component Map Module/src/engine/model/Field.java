@@ -1,7 +1,6 @@
 package engine.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import architecture.Entity;
 
 import com.google.common.base.Optional;
 
@@ -10,7 +9,7 @@ import com.google.common.base.Optional;
  * 
  * Represents single immovable place on map.
  */
-public class Field extends Entity {
+public class Field {
 
 	/* ========== Public ========== */
 	public Field(TerrainType terrainType, Coords coords) {
@@ -45,7 +44,6 @@ public class Field extends Entity {
 	}
 
 	/* ========== Private ========== */
-	private static final long serialVersionUID = -1071084747871367184L;
 	private TerrainType terrainType;
 	private final Coords coords;
 	private Optional<Creature> occupyingCreature;
