@@ -1,76 +1,78 @@
 package model;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Iterator;
-
-import com.google.common.base.Optional;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 1.0008 Board
  * 
  * Represents a play {@link Board} in the game.
  */
-public class Board implements Iterable<Field> {
+@Entity
+@Table
+public class Board {
 
-	/* ========== Public ========== */
-	public Board(String name, Field[][] board, int width, int height) {
+	/* ========== Fields ========== */
+	@Id
+	@Column(name = "ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-		checkNotNull(name);
-		checkNotNull(board);
+	@Column
+	private String name;
 
-		this.name = name;
-		this.board = board;
-		this.height = height;
-		this.width = width;
+	@Column
+	private Field[][] board;
+
+	@Column
+	private int height;
+
+	@Column
+	private int width;
+
+	/* ========== Properties ========== */
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Field[][] getBoard() {
 		return board;
+	}
+
+	public void setBoard(Field[][] board) {
+		this.board = board;
 	}
 
 	public int getHeight() {
 		return height;
 	}
 
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
 	public int getWidth() {
 		return width;
 	}
 
-	public Optional<Field> get(Coords coords) {
-
-		int x = coords.getX();
-		int y = coords.getY();
-
-		if (fitInBoard(x, y)) {
-			return Optional.fromNullable(this.board[x][y]);
-		}
-
-		return Optional.absent();
-	}
-
-	/**
-	 * Resets current and returns newly set {@link BoardIterator}.
-	 * 
-	 * @return Newly set {@link BoardIterator}.
-	 */
-	@Override
-	public Iterator<Field> iterator() {
-		return new BoardIterator(this);
-	}
-
-	/* ========== Private ========== */
-	private final String name;
-	private final Field[][] board;
-	private final int height;
-	private final int width;
-
-	private boolean fitInBoard(int x, int y) {
-		return x < width && x >= 0 && y < height && y >= 0;
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
 }

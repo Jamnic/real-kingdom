@@ -1,31 +1,57 @@
 package model;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import priority.Prioritable;
-import priority.PriorityType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import model.enums.PriorityType;
+import model.enums.TaskStatus;
 
 /**
  * 1.0005 Task
  * 
  * Represents executable {@link Task} for {@link Creature}.
  */
-public class Task implements Prioritable {
+@Entity
+@Table
+public class Task {
 
-	/* ========== Public ========== */
-	public Task(Creature creature, PriorityType priority, TaskStatus status) {
+	/* ========== Fields ========== */
+	@Id
+	@Column(name = "ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-		checkNotNull(creature);
-		checkNotNull(priority);
-		checkNotNull(status);
+	@OneToOne
+	private Creature creature;
 
-		this.creature = creature;
-		this.priority = priority;
-		this.status = status;
+	@Enumerated(EnumType.STRING)
+	private TaskStatus status;
 
+	@Enumerated(EnumType.STRING)
+	private PriorityType priority;
+
+	/* ========== Properties ========== */
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Creature getCreature() {
 		return creature;
+	}
+
+	public void setCreature(Creature creature) {
+		this.creature = creature;
 	}
 
 	public TaskStatus getStatus() {
@@ -33,23 +59,15 @@ public class Task implements Prioritable {
 	}
 
 	public void setStatus(TaskStatus status) {
-		checkNotNull(status);
 		this.status = status;
 	}
 
-	@Override
 	public PriorityType getPriority() {
 		return priority;
 	}
 
 	public void setPriority(PriorityType priority) {
-		checkNotNull(priority);
 		this.priority = priority;
 	}
-
-	/* ========== Private ========== */
-	private final Creature creature;
-	private TaskStatus status;
-	private PriorityType priority;
 
 }

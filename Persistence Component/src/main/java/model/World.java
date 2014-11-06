@@ -1,44 +1,80 @@
 package model;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import model.enums.WorldSize;
 
 /**
  * 1.0009 World
  * 
  * Represents couple of {@link Board}'s in one {@link World}.
  */
+@Entity
+@Table
 public class World {
 
-	/* ========== Public ========== */
-	public World(String name, Board mainBoard, WorldSize worldSize) {
+	/* ========== Fields ========== */
+	@Id
+	@Column(name = "ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-		super();
+	@Column
+	private String name;
 
-		checkNotNull(name);
-		checkNotNull(mainBoard);
+	@OneToOne
+	private Board mainBoard;
 
-		this.name = name;
-		this.mainBoard = mainBoard;
-		this.worldSize = worldSize;
+	@OneToMany
+	private List<Board> boards;
 
-		lastUpdate = new Date();
-		boards = new LinkedList<Board>();
+	@Column
+	private Date lastUpdate;
+
+	@Column
+	private WorldSize worldSize;
+
+	/* ========== Properties ========== */
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Board getMainBoard() {
 		return mainBoard;
 	}
 
+	public void setMainBoard(Board mainBoard) {
+		this.mainBoard = mainBoard;
+	}
+
 	public List<Board> getBoards() {
 		return boards;
+	}
+
+	public void setBoards(List<Board> boards) {
+		this.boards = boards;
 	}
 
 	public Date getLastUpdate() {
@@ -46,7 +82,6 @@ public class World {
 	}
 
 	public void setLastUpdate(Date lastUpdate) {
-		checkNotNull(lastUpdate);
 		this.lastUpdate = lastUpdate;
 	}
 
@@ -54,11 +89,8 @@ public class World {
 		return worldSize;
 	}
 
-	/* ========== Private ========== */
-	private final String name;
-	private final Board mainBoard;
-	private final List<Board> boards;
-	private Date lastUpdate;
-	private final WorldSize worldSize;
+	public void setWorldSize(WorldSize worldSize) {
+		this.worldSize = worldSize;
+	}
 
 }
