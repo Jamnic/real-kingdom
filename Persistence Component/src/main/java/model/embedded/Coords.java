@@ -8,33 +8,33 @@ import model.Board;
 /**
  * 1.0007 Coords
  * 
- * Immutable {@link Coords} class representing coordinates in {@link Board}.
+ * Class representing coordinates in {@link Board}.
  */
 @Embeddable
 public class Coords {
 
 	/* ========== Fields ========== */
 	@Column
-	private int xPosition;
+	private int x;
 
 	@Column
-	private int yPosition;
+	private int y;
 
 	/* ========== Properties ========== */
-	public int getxPosition() {
-		return xPosition;
+	public int getX() {
+		return x;
 	}
 
-	public void setxPosition(int xPosition) {
-		this.xPosition = xPosition;
+	public void setX(int x) {
+		this.x = x;
 	}
 
-	public int getyPosition() {
-		return yPosition;
+	public int getY() {
+		return y;
 	}
 
-	public void setyPosition(int yPosition) {
-		this.yPosition = yPosition;
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }

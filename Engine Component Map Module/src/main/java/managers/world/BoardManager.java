@@ -2,6 +2,8 @@ package managers.world;
 
 import model.Board;
 import model.World;
+import dto.BoardDto;
+import dto.FieldDto;
 
 public interface BoardManager {
 
@@ -15,5 +17,7 @@ public interface BoardManager {
 	String createBoardName(String worldName);
 
 	Board createNewBoard(String boardName, int width, int height);
+
+	Iterable<FieldDto> getIterator(BoardDto board);
 
 }
