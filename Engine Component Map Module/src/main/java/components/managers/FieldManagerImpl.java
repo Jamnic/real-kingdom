@@ -1,4 +1,4 @@
-package managers.world;
+package components.managers;
 
 import model.Field;
 import model.embedded.Coords;
@@ -7,6 +7,8 @@ import model.enums.TerrainType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import api.managers.BoardManager;
+import api.managers.FieldManager;
 import dto.CoordsDto;
 import dto.FieldDto;
 import repository.FieldDao;
@@ -16,7 +18,7 @@ public class FieldManagerImpl implements FieldManager {
 
 	@Autowired
 	private FieldDao fieldDao;
-	
+
 	@Autowired
 	private BoardManager boardManager;
 
@@ -36,9 +38,10 @@ public class FieldManagerImpl implements FieldManager {
 
 	@Override
 	public Field[][] assembleFieldFromFieldDto(FieldDto[][] board) {
-		
-		for (FieldDto[] fieldArray : board);
-		
+
+		for (FieldDto[] fieldArray : board)
+			;
+
 		return null;
 	}
 

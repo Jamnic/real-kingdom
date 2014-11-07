@@ -2,10 +2,13 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import model.enums.BoardSize;
 
 /**
  * 1.0008 Board
@@ -28,11 +31,8 @@ public class Board {
 	@Column
 	private Field[][] board;
 
-	@Column
-	private int height;
-
-	@Column
-	private int width;
+	@Enumerated
+	private BoardSize boardSize;
 
 	/* ========== Properties ========== */
 	public Long getId() {
@@ -59,20 +59,12 @@ public class Board {
 		this.board = board;
 	}
 
-	public int getHeight() {
-		return height;
+	public BoardSize getBoardSize() {
+		return boardSize;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
+	public void setBoardSize(BoardSize boardSize) {
+		this.boardSize = boardSize;
 	}
 
 }

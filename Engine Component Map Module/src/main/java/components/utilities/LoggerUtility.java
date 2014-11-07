@@ -1,15 +1,30 @@
-package utilities;
+package components.utilities;
 
-import architecture.Utility;
+import org.springframework.stereotype.Component;
 
 /**
  * Logging utility class. Can log messages to the console with specified levels of importance. Each level can be
  * configured during creation of logger or later through setters.
  */
+@Component
 @SuppressWarnings("rawtypes")
-public final class LoggerUtility extends Utility {
+public class LoggerUtility {
 
 	/* ========== Public ========== */
+	/**
+	 * Constructs default {@link LoggerUtility}.
+	 */
+	public LoggerUtility() {
+
+		super();
+
+		this.warningEnabled = true;
+		this.debugEnabled = false;
+		this.errorEnabled = true;
+		this.infoEnabled = true;
+
+	}
+
 	/**
 	 * Constructs {@link LoggerUtility} with specified parameters.
 	 * 

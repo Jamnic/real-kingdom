@@ -14,7 +14,6 @@
 
 	<tx:annotation-driven />
 	<context:annotation-config />
-	<context:component-scan base-package="managers" />
-	<context:component-scan base-package="managers.*" />
+	<context:component-scan base-package="components.*" />
 
 </beans>

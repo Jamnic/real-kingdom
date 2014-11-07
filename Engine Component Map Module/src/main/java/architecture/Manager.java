@@ -1,6 +1,5 @@
 package architecture;
 
-
 /**
  * Abstraction over all {@link Manager} implementing classes.<br>
  * <br>
@@ -14,5 +13,5 @@ package architecture;
  * {@link Manager}s should be provided with proper interfaces.<br>
  * <br>
  */
-public abstract class Manager extends EngineComponentMapModule {
+public abstract class Manager {
 }

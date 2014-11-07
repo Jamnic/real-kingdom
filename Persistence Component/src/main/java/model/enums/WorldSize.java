@@ -1,9 +1,11 @@
 package model.enums;
 
+import model.World;
+
 /**
  * 1.0012 WorldSize
  * 
- * Represents available world size values.
+ * Represents available {@link World} size values.
  */
 public enum WorldSize {
 

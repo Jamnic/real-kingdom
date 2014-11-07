@@ -1,6 +1,5 @@
 package architecture;
 
-
 /**
  * Abstraction over all {@link GameThread} implementing classes.<br>
  * <br>
@@ -13,5 +12,5 @@ package architecture;
  * {@link GameThread}s should be provided with proper interfaces.<br>
  * <br>
  */
-public abstract class GameThread extends EngineComponentMapModule {
+public abstract class GameThread {
 }

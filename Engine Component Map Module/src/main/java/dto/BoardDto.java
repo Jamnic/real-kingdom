@@ -1,35 +1,26 @@
 package dto;
 
+import model.enums.BoardSize;
+
 public class BoardDto {
 
 	/* ========== Fields ========== */
-	private final String name;
 	private final FieldDto[][] board;
-	private final int boardWidth;
-	private final int boardHeight;
+	private final BoardSize boardSize;
 
 	/* ========== Fields ========== */
-	public BoardDto(String name, FieldDto[][] board, int boardWidth, int boardHeight) {
-		this.name = name;
+	public BoardDto(FieldDto[][] board, BoardSize boardSize) {
 		this.board = board;
-		this.boardWidth = boardWidth;
-		this.boardHeight = boardHeight;
+		this.boardSize = boardSize;
 	}
 
 	/* ========== Properties ========== */
-	public String getName() {
-		return name;
-	}
-
 	public FieldDto[][] getBoard() {
 		return board;
 	}
 
-	public int getBoardWidth() {
-		return boardWidth;
+	public BoardSize getBoardSize() {
+		return boardSize;
 	}
 
-	public int getBoardHeight() {
-		return boardHeight;
-	}
 }

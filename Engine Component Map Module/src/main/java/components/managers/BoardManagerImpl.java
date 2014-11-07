@@ -1,14 +1,21 @@
-package managers.world;
+package components.managers;
 
-import managers.world.algorithm.TerrainGeneratorAlgorithm;
 import model.Board;
+import model.enums.BoardSize;
+import model.enums.TerrainType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import priority.BoardIterator;
 import repository.BoardDao;
+import api.algorithms.TerrainGeneratorAlgorithm;
+import api.managers.BoardManager;
+import api.managers.FieldManager;
 import architecture.Manager;
+
+import com.google.common.base.Optional;
+
 import dto.BoardDto;
 import dto.CoordsDto;
 import dto.FieldDto;
@@ -18,7 +25,7 @@ public class BoardManagerImpl extends Manager implements BoardManager {
 
 	@Autowired
 	private BoardDao boardDao;
-	
+
 	@Autowired
 	private FieldManager fieldManager;
 
@@ -28,11 +35,11 @@ public class BoardManagerImpl extends Manager implements BoardManager {
 	/* ========== Public ========== */
 	/** {@inheritDoc} */
 	@Override
-	public Board createNewBoard(final String boardName, final int width, final int height) {
+	public Board createNewBoard(String boardName, BoardSize boardSize) {
 
-		BoardDto boardDto = terrainGeneratorAlgorithm.generateBoard(boardName, width, height);
+		BoardDto boardDto = terrainGeneratorAlgorithm.createBoardDtoWithGeneratedTerrain(boardSize);
 
-		Board board = assembleBoardFromBoardDto(boardDto);
+		Board board = assembleBoardFromBoardDto(boardName, boardDto);
 
 		return boardDao.save(board);
 	}
@@ -54,26 +61,33 @@ public class BoardManagerImpl extends Manager implements BoardManager {
 		return new BoardIterator(board);
 	}
 
-	public FieldDto get(Board board, CoordsDto coordsDto) {
+	/** {@inheritDoc} */
+	@Override
+	public Optional<FieldDto> getFieldDto(BoardDto boardDto, CoordsDto coordsDto) {
 
 		int y = coordsDto.getY();
 		int x = coordsDto.getX();
 
-		return new FieldDto(board.getBoard()[x][y].getTerrainType(), new CoordsDto(x, y));
+		if (x < 0 || x >= boardDto.getBoardSize().getWidth() || y < 0 || y >= boardDto.getBoardSize().getHeight())
+			return Optional.absent();
+
+		TerrainType terrainType = boardDto.getBoard()[x][y].getTerrainType();
+		FieldDto fieldDto = new FieldDto(terrainType, new CoordsDto(x, y));
+
+		return Optional.fromNullable(fieldDto);
 	}
 
 	/* ========== Private ========== */
-	private Board assembleBoardFromBoardDto(BoardDto boardDto) {
+	private Board assembleBoardFromBoardDto(String boardName, BoardDto boardDto) {
 
 		Board board = new Board();
 
 		board.setBoard(fieldManager.assembleFieldFromFieldDto(boardDto.getBoard()));
-		board.setHeight(boardDto.getBoardHeight());
-		board.setWidth(boardDto.getBoardWidth());
-		board.setName(boardDto.getName());
+		board.setBoardSize(boardDto.getBoardSize());
+		board.setName(boardName);
 
 		return board;
 
 	}
-	
+
 }

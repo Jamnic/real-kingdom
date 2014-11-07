@@ -1,16 +1,29 @@
 package game;
 
-import architecture.EngineComponentMapModule;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+
+import api.game.MainGameThread;
+
+import components.game.Game;
 
 /**
  * This is a place, where {@link Game} can be run.
  */
-public final class GameRunner extends EngineComponentMapModule {
+@ContextConfiguration(locations = { "/engine-component-map-module-spring.xml" })
+public final class GameRunner {
 
 	/* ========== Main ========== */
 	public static void main(String[] args) {
-		try {
 
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
+				"/engine-component-map-module-spring.xml");
+
+		Game game = (Game) context.getBean("game");
+		MainGameThread mainGameThread = (MainGameThread) context.getBean("mainGameThread");
+
+		try {
 			game.initialize();
 
 			mainGameThread.start();
@@ -18,10 +31,12 @@ public final class GameRunner extends EngineComponentMapModule {
 			mainGameThread.stop();
 
 		} catch (InterruptedException e) {
-			log.err(GameRunner.class, "Game has crashed.\n" + e.getMessage());
-
 			// Game crash!
+		} finally {
+			context.close();
 		}
+
+		new GameRunner();
 	}
 
 }

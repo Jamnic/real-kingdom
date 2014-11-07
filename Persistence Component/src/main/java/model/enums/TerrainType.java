@@ -1,7 +1,6 @@
 package model.enums;
 
 import model.Field;
-import model.Sprite;
 
 /**
  * 1.0004 TerrainType
@@ -11,23 +10,11 @@ import model.Sprite;
 public enum TerrainType {
 
 	// @formatter:off
-	HILLS(new Sprite()),
-	OCEANS(new Sprite()),
-	SAVANNAH(new Sprite()),
-	MOUNTAINS(new Sprite()),
-	WASTELANDS(new Sprite());
+	HILLS,
+	OCEANS,
+	SAVANNAH,
+	MOUNTAINS,
+	WASTELANDS;
 	// @formatter:on
-
-	/* ========== Public ========== */
-	public Sprite getSprite() {
-		return sprite;
-	}
-
-	/* ========== Private ========== */
-	private final Sprite sprite;
-
-	private TerrainType(Sprite sprite) {
-		this.sprite = sprite;
-	}
 
 }

@@ -1,21 +1,37 @@
-package game;
+package components.game;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import api.game.MainGameThread;
 import architecture.GameThread;
+
+import components.utilities.LoggerUtility;
 
 /**
  * Default implementation of {@link MainGameThread}.
  * 
  * {@inheritDoc}
  */
+@Component(value = "mainGameThread")
 public class MainGameThreadImpl extends GameThread implements MainGameThread {
+
+	@Autowired
+	private Game game;
+
+	@Autowired
+	private LoggerUtility log;
 
 	/* ========== Public ========== */
 	/** {@inheritDoc} */
 	@Override
 	public void start() throws InterruptedException {
 
-		if (!isRunning)
+		if (!isRunning) {
+			log.info(MainGameThreadImpl.class, "Starting main game thread.");
+
 			gameThread.start();
+		}
 
 		isRunning = true;
 	}
@@ -24,15 +40,18 @@ public class MainGameThreadImpl extends GameThread implements MainGameThread {
 	@Override
 	public void stop() throws InterruptedException {
 
-		if (isRunning)
+		if (isRunning) {
+			log.info(MainGameThreadImpl.class, "Stopped main game thread.");
+
 			gameThread.join();
+		}
 
 		isRunning = false;
 	}
 
 	/* ========== Private ========== */
 	private static final long ONE_SECOND_TICK_DELAY = 1000000000;
-	private static final long FRAME_GENERATION_DELAY = 16800000;
+	private static final long DESIRED_TPS_PER_SECOND = 60;
 
 	private boolean isRunning;
 
@@ -48,23 +67,30 @@ public class MainGameThreadImpl extends GameThread implements MainGameThread {
 	private void fpsCounter() {
 		long previousInterval = getCurrentNanoTime();
 		int fps = 0;
+		int tps = 0;
 
 		while (true) {
 			long currentInterval = getCurrentNanoTime();
 
-			boolean oneFrameHasPassed = currentInterval - previousInterval > fps * FRAME_GENERATION_DELAY;
+			boolean oneTickHasPassed = currentInterval - previousInterval >= (tps + 1)
+					* (ONE_SECOND_TICK_DELAY / DESIRED_TPS_PER_SECOND);
 			boolean oneSecondHasPassed = currentInterval - ONE_SECOND_TICK_DELAY >= previousInterval;
 
-			if (oneFrameHasPassed) {
-				render();
-				fps++;
+			if (oneTickHasPassed) {
+				tick();
+				tps++;
 			}
 
 			if (oneSecondHasPassed) {
-				tick();
 				previousInterval = currentInterval;
+				log.info(MainGameThreadImpl.class, "FPS: " + fps + ", TPS: " + tps);
 				fps = 0;
+				tps = 0;
 			}
+
+			render();
+			fps++;
+
 		}
 	}
 

@@ -1,4 +1,4 @@
-package game;
+package api.game;
 
 /**
  * Interface for {@link MainGameThread}. It runs the heart of the game, and invokes ticks and renders of the graphics.

@@ -23,7 +23,7 @@ public class Sprite {
 	private Long id;
 
 	@Column
-	private byte[] image;
+	private String image;
 
 	/* ========== Properties ========== */
 	public Long getId() {
@@ -34,11 +34,11 @@ public class Sprite {
 		this.id = id;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

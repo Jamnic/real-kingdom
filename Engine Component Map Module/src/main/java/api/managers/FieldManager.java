@@ -1,4 +1,4 @@
-package managers.world;
+package api.managers;
 
 import dto.CoordsDto;
 import dto.FieldDto;

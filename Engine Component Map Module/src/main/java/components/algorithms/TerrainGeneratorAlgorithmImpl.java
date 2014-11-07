@@ -1,16 +1,19 @@
-package managers.world.algorithm;
+package components.algorithms;
 
-import managers.world.FieldManager;
-import model.embedded.Coords;
+import model.enums.BoardSize;
 import model.enums.TerrainType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import architecture.Algorithm;
+import api.algorithms.TerrainGeneratorAlgorithm;
+import api.managers.BoardManager;
+import api.managers.FieldManager;
 
 import com.google.common.base.Optional;
 
+import components.utilities.DiceUtility;
+import components.utilities.LoggerUtility;
 import dto.BoardDto;
 import dto.CoordsDto;
 import dto.FieldDto;
@@ -19,31 +22,37 @@ import dto.FieldDto;
  * Default implementation of {@link TerrainGeneratorAlgorithm}.
  */
 @Component
-public class TerrainGeneratorAlgorithmImpl extends Algorithm implements TerrainGeneratorAlgorithm {
+public class TerrainGeneratorAlgorithmImpl implements TerrainGeneratorAlgorithm {
+
+	@Autowired
+	private BoardManager boardManager;
 
 	@Autowired
 	private FieldManager fieldManager;
+	
+	@Autowired
+	private DiceUtility dice;
+	
+	@Autowired
+	private LoggerUtility log;
 
 	/* ========== Public ========== */
 	/** {@inheritDoc} */
 	@Override
-	public BoardDto generateBoard(final String name, final int boardWidth, final int boardHeight) {
+	public BoardDto createBoardDtoWithGeneratedTerrain(BoardSize boardSize) {
 
-		log.info(this.getClass(), "Initializing game board...");
-		initializeBoardWithOceans(name, boardWidth, boardHeight);
-
-		log.info(this.getClass(), "Generating wastelands...");
-		generateSpreadTerrain(5, 50, TerrainType.WASTELANDS);
-
-		log.info(this.getClass(), "Generating mountains...");
-		generateSpreadTerrain(7, 30, TerrainType.MOUNTAINS);
-
-		log.info(this.getClass(), "Generating hills...");
+		log.info(TerrainGeneratorAlgorithmImpl.class, "Initializing worlds with oceans...");
+		initializeBoardWithOceans(boardSize);
+		
+		log.info(TerrainGeneratorAlgorithmImpl.class, "Creating wastelands...");
+		generateSpreadTerrain(5, 10, TerrainType.WASTELANDS);
+		log.info(TerrainGeneratorAlgorithmImpl.class, "Creating mountains...");
+		generateSpreadTerrain(7, 2, TerrainType.MOUNTAINS);
+		log.info(TerrainGeneratorAlgorithmImpl.class, "Creating hills...");
 		generateSpreadTerrain(20, 5, TerrainType.HILLS);
-
-		log.info(this.getClass(), "Generating savannah...");
-		generateSpreadTerrain(20, 20, TerrainType.SAVANNAH);
-
+		log.info(TerrainGeneratorAlgorithmImpl.class, "Creating savannah...");
+		generateSpreadTerrain(20, 7, TerrainType.SAVANNAH);
+		
 		return boardDto;
 	}
 
@@ -53,7 +62,10 @@ public class TerrainGeneratorAlgorithmImpl extends Algorithm implements TerrainG
 
 	private BoardDto boardDto;
 
-	private void initializeBoardWithOceans(String name, int boardWidth, int boardHeight) {
+	private void initializeBoardWithOceans(BoardSize boardSize) {
+
+		int boardWidth = boardSize.getWidth();
+		int boardHeight = boardSize.getHeight();
 
 		FieldDto[][] newArray = new FieldDto[boardWidth][];
 
@@ -64,7 +76,7 @@ public class TerrainGeneratorAlgorithmImpl extends Algorithm implements TerrainG
 				newArray[i][j] = new FieldDto(TerrainType.OCEANS, new CoordsDto(i, j));
 		}
 
-		boardDto = new BoardDto(name, newArray, boardWidth, boardHeight);
+		boardDto = new BoardDto(newArray, boardSize);
 	}
 
 	private void generateSpreadTerrain(int seedFrequency, int initialMagnitude, TerrainType terrain) {
@@ -91,7 +103,7 @@ public class TerrainGeneratorAlgorithmImpl extends Algorithm implements TerrainG
 	private void setTerrainAndSpreadToNeighbours(int magnitude, TerrainType terrain, FieldDto field) {
 
 		field.setTerrainType(terrain);
-		Coords coords = field.getCoords();
+		CoordsDto coords = field.getCoordsDto();
 
 		if (magnitude == 0)
 			return;
@@ -105,9 +117,9 @@ public class TerrainGeneratorAlgorithmImpl extends Algorithm implements TerrainG
 		spreadFurtherToNeighbour(magnitude, terrain, new CoordsDto(x - 1, y + 0));
 	}
 
-	private void spreadFurtherToNeighbour(int magnitude, TerrainType terrain, CoordsDto coords) {
+	private void spreadFurtherToNeighbour(int magnitude, TerrainType terrain, CoordsDto coordsDto) {
 
-		Optional<FieldDto> fieldOptional = board.get(coords);
+		Optional<FieldDto> fieldOptional = boardManager.getFieldDto(boardDto, coordsDto);
 
 		if (!fieldOptional.isPresent())
 			return;

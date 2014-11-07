@@ -38,6 +38,9 @@ public class Field {
 	@OneToOne
 	private Creature creature;
 
+	@OneToOne
+	private Sprite sprite;
+
 	/* ========== Properties ========== */
 	public Long getId() {
 		return id;
@@ -71,4 +74,11 @@ public class Field {
 		this.creature = creature;
 	}
 
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
 }

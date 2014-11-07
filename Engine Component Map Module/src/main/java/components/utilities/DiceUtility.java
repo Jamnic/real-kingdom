@@ -1,13 +1,14 @@
-package utilities;
+package components.utilities;
 
 import java.util.Random;
 
-import architecture.Utility;
+import org.springframework.stereotype.Component;
 
 /**
  * Simulates a simple dice object, providing randomization when it is needed.
  */
-public final class DiceUtility extends Utility {
+@Component
+public class DiceUtility {
 
 	/* ========== Public ========== */
 	/**

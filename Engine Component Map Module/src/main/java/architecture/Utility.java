@@ -1,6 +1,5 @@
 package architecture;
 
-
 /**
  * Abstraction over all {@link Utility} implementing classes.<br>
  * <br>
@@ -14,5 +13,5 @@ package architecture;
  * It should not have any interface, because it should be kept simple.<br>
  * <br>
  */
-public abstract class Utility extends EngineComponentMapModule {
+public abstract class Utility {
 }

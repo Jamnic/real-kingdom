@@ -37,8 +37,8 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	@Override
 	public FieldDto next() {
 
-		return iterateOnHeightAndWidth(iteratedBoard.getBoard(), iteratedBoard.getBoardHeight(),
-				iteratedBoard.getBoardWidth());
+		return iterateOnHeightAndWidth(iteratedBoard.getBoard(), iteratedBoard.getBoardSize().getHeight(),
+				iteratedBoard.getBoardSize().getWidth());
 
 	}
 
@@ -50,7 +50,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	@Override
 	public boolean hasNext() {
 
-		return !checkIfCurrentReachedMaximum(currentXPositionOfIterator, iteratedBoard.getBoardWidth());
+		return !checkIfCurrentReachedMaximum(currentXPositionOfIterator, iteratedBoard.getBoardSize().getWidth());
 
 	}
 
@@ -111,7 +111,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	private BoardDto iteratedBoard;
 
 	private void setCurrentXPositionOfIterator(final int newXPosition) {
-		if (newXPosition < 0 && newXPosition >= iteratedBoard.getBoardWidth())
+		if (newXPosition < 0 && newXPosition >= iteratedBoard.getBoardSize().getWidth())
 			// TODO exception
 			return;
 
@@ -119,7 +119,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	}
 
 	private void setCurrentYPositionOfIterator(final int newYPosition) {
-		if (newYPosition < 0 && newYPosition >= iteratedBoard.getBoardHeight())
+		if (newYPosition < 0 && newYPosition >= iteratedBoard.getBoardSize().getHeight())
 			// TODO exception
 			return;
 
