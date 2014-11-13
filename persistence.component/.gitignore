@@ -1,0 +1,7 @@
+/target
+/.classpath
+/.project
+/.settings
+/persistence-test.db
+/persistence.db
+/test-output

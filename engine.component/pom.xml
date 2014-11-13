@@ -4,14 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>real.kingdom</groupId>
-	<artifactId>engine.component.parent</artifactId>
+	<artifactId>engine.component</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Parent for Engine Component</name>
 
 	<modules>
-		<module>../Engine Component Map Module</module>
+		<module>../engine.component.map.module</module>
 	</modules>
 
 	<!-- Dependencies -->

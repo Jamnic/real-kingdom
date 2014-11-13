@@ -1,0 +1,9 @@
+/.settings
+/bin
+/test-output
+/.classpath
+/.project
+/world.rko
+/target
+/movies.db
+/persistence.db

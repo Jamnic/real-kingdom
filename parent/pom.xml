@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>real.kingdom</groupId>
+	<artifactId>parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+
+	<name>Parent</name>
+
+	<modules>
+		<module>../persistence.component</module>
+		<module>../engine.component</module>
+		<module>../graphics.component</module>
+	</modules>
+
+	<properties>
+		<spring.version>4.1.1.RELEASE</spring.version>
+		<spring-data.version>1.7.1.RELEASE</spring-data.version>
+
+		<hibernate.version>4.3.7.Final</hibernate.version>
+		<hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
+		<hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
+		<hibernate-annotations.version>4.0.1.Final</hibernate-annotations.version>
+
+		<guava.version>18.0</guava.version>
+		<junit.version>4.11</junit.version>
+
+		<dbcp.version>1.4</dbcp.version>
+		<sqlite.version>3.7.2</sqlite.version>
+		<querydsl.version>3.5.0</querydsl.version>
+
+		<apt-maven-plugin.version>1.1.1</apt-maven-plugin.version>
+		<maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- === SPRING === -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- === OTHERS === -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

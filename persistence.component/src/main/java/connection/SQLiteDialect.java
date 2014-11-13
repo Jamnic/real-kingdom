@@ -173,7 +173,7 @@ public class SQLiteDialect extends Dialect {
 	@Override
 	public SQLExceptionConverter buildSQLExceptionConverter() {
 		return new SQLExceptionConverter() {
-			private static final long serialVersionUID = 1L;
+			private static final long serialVersionUID = -2305086068383866926L;
 
 			@Override
 			public JDBCException convert(SQLException sqlException, String message, String sql) {

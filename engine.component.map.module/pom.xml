@@ -11,7 +11,8 @@
 
 	<artifactId>engine.component.map.module</artifactId>
 	<packaging>jar</packaging>
-	<name>Properties reader module</name>
+
+	<name>Engine Component Map Module</name>
 
 	<dependencies>
 
