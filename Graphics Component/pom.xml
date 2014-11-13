@@ -4,19 +4,37 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>real.kingdom</groupId>
-	<artifactId>engine.component.parent</artifactId>
+	<artifactId>graphics.component</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
 
-	<name>Parent for Engine Component</name>
+	<name>Graphics component</name>
 
-	<modules>
-		<module>../Engine Component Map Module</module>
-	</modules>
+	<properties>
+		<spring.version>4.1.1.RELEASE</spring.version>
+	</properties>
 
-	<!-- Dependencies -->
 	<dependencies>
 
+		<dependency>
+			<groupId>real.kingdom</groupId>
+			<artifactId>engine.component.map.module</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- === SPRING === -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- === OTHERS === -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
@@ -27,12 +45,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.10.8</version>
 		</dependency>
 
 	</dependencies>
