@@ -5,3 +5,5 @@
 /.project
 /world.rko
 /target
+/movies.db
+/persistence.db

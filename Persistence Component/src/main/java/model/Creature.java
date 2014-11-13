@@ -1,33 +1,64 @@
 package model;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import priority.PriorityList;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.google.common.base.Optional;
+import model.embedded.TaskList;
+import model.enums.CreatureStatus;
 
 /**
  * 1.0001 Creature
  * 
  * Represents a living, movable creature, which can be assigned some tasks to do.
  */
+@Entity
+@Table
 public class Creature {
 
-	/* ========== Public ========== */
-	public Creature(String name, Sprite sprite) {
+	/* ========== Fields ========== */
+	@Id
+	@Column(name = "ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-		checkNotNull(name);
+	@Column
+	private String name;
 
-		this.name = name;
+	@Enumerated(EnumType.STRING)
+	private CreatureStatus status;
 
-		this.status = CreatureStatus.ALIVE;
-		this.occupiedField = Optional.absent();
-		this.taskList = new PriorityList<Task>();
-		this.sprite = sprite;
+	@OneToOne
+	private Field field;
 
+	@Embedded
+	private TaskList taskList;
+
+	@OneToOne
+	private Sprite sprite;
+
+	/* ========== Properties ========== */
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public CreatureStatus getStatus() {
@@ -35,31 +66,31 @@ public class Creature {
 	}
 
 	public void setStatus(CreatureStatus status) {
-		checkNotNull(status);
 		this.status = status;
 	}
 
-	public Optional<Field> getOccupiedField() {
-		return occupiedField;
+	public Field getField() {
+		return field;
 	}
 
-	public void setOccupiedField(Field occupiedField) {
-		this.occupiedField = Optional.fromNullable(occupiedField);
+	public void setField(Field field) {
+		this.field = field;
 	}
 
-	public Task getTask() {
-		return taskList.peek();
+	public TaskList getTaskList() {
+		return taskList;
+	}
+
+	public void setTaskList(TaskList taskList) {
+		this.taskList = taskList;
 	}
 
 	public Sprite getSprite() {
 		return sprite;
 	}
 
-	/* ========== Private ========== */
-	private final String name;
-	private CreatureStatus status;
-	private Optional<Field> occupiedField;
-	private final PriorityList<Task> taskList;
-	private final Sprite sprite;
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
 
 }

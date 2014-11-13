@@ -1,25 +1,64 @@
 package model;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.google.common.base.Optional;
+import model.embedded.Coords;
+import model.enums.ProductionFacility;
+import model.enums.RoadType;
+import model.enums.TerrainType;
 
 /**
  * 1.0003 Field
  * 
  * Represents single immovable place on map.
  */
+@Entity
+@Table
 public class Field {
 
-	/* ========== Public ========== */
-	public Field(TerrainType terrainType, Coords coords) {
+	/* ========== Fields ========== */
+	@Id
+	@Column(name = "ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-		checkNotNull(terrainType);
-		checkNotNull(coords);
+	@Enumerated(EnumType.STRING)
+	private TerrainType terrainType;
 
-		this.terrainType = terrainType;
-		this.coords = coords;
+	@Embedded
+	private Coords coords;
 
+	@OneToOne
+	private Creature creature;
+
+	@OneToOne
+	private Sprite sprite;
+
+	@Enumerated
+	private RoadType road;
+
+	@OneToOne
+	private Settlement settlement;
+
+	@Enumerated
+	private ProductionFacility productionFacility;
+
+	/* ========== Properties ========== */
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public TerrainType getTerrainType() {
@@ -27,7 +66,6 @@ public class Field {
 	}
 
 	public void setTerrainType(TerrainType terrainType) {
-		checkNotNull(terrainType);
 		this.terrainType = terrainType;
 	}
 
@@ -35,17 +73,47 @@ public class Field {
 		return coords;
 	}
 
-	public Optional<Creature> getOccupyingCreature() {
-		return occupyingCreature;
+	public void setCoords(Coords coords) {
+		this.coords = coords;
 	}
 
-	public void setOccupyingCreature(Optional<Creature> occupyingCreature) {
-		this.occupyingCreature = occupyingCreature;
+	public Creature getCreature() {
+		return creature;
 	}
 
-	/* ========== Private ========== */
-	private TerrainType terrainType;
-	private final Coords coords;
-	private Optional<Creature> occupyingCreature;
+	public void setCreature(Creature creature) {
+		this.creature = creature;
+	}
 
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
+
+	public RoadType getRoad() {
+		return road;
+	}
+
+	public void setRoad(RoadType road) {
+		this.road = road;
+	}
+
+	public Settlement getSettlement() {
+		return settlement;
+	}
+
+	public void setSettlement(Settlement settlement) {
+		this.settlement = settlement;
+	}
+
+	public ProductionFacility getProductionFacility() {
+		return productionFacility;
+	}
+
+	public void setProductionFacility(ProductionFacility productionFacility) {
+		this.productionFacility = productionFacility;
+	}
 }
