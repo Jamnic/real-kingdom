@@ -13,7 +13,7 @@ import components.utilities.LoggerUtility;
  * 
  * {@inheritDoc}
  */
-@Component(value = "mainGameThread")
+@Component
 public class MainGameThreadImpl extends GameThread implements MainGameThread {
 
 	@Autowired

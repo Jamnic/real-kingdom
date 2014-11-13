@@ -23,7 +23,7 @@ public class SpriteDaoTest {
 		spriteDao.save(new Sprite());
 
 		Sprite willBeUpdated = new Sprite();
-		willBeUpdated.setImage(new byte[1]);
+		willBeUpdated.setImage("@");
 		spriteDao.save(willBeUpdated);
 
 		Sprite willBeDeleted = new Sprite();
@@ -33,7 +33,7 @@ public class SpriteDaoTest {
 		assertEquals(spriteDao.findAll().size(), 3);
 
 		// Update
-		willBeUpdated.setImage(new byte[1]);
+		willBeUpdated.setImage("#");
 		spriteDao.save(willBeUpdated);
 		assertEquals(spriteDao.findAll().size(), 3);
 

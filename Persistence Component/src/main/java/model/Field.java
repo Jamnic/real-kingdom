@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import model.embedded.Coords;
+import model.enums.ProductionFacility;
+import model.enums.RoadType;
 import model.enums.TerrainType;
 
 /**
@@ -40,6 +42,15 @@ public class Field {
 
 	@OneToOne
 	private Sprite sprite;
+
+	@Enumerated
+	private RoadType road;
+
+	@OneToOne
+	private Settlement settlement;
+
+	@Enumerated
+	private ProductionFacility productionFacility;
 
 	/* ========== Properties ========== */
 	public Long getId() {
@@ -80,5 +91,29 @@ public class Field {
 
 	public void setSprite(Sprite sprite) {
 		this.sprite = sprite;
+	}
+
+	public RoadType getRoad() {
+		return road;
+	}
+
+	public void setRoad(RoadType road) {
+		this.road = road;
+	}
+
+	public Settlement getSettlement() {
+		return settlement;
+	}
+
+	public void setSettlement(Settlement settlement) {
+		this.settlement = settlement;
+	}
+
+	public ProductionFacility getProductionFacility() {
+		return productionFacility;
+	}
+
+	public void setProductionFacility(ProductionFacility productionFacility) {
+		this.productionFacility = productionFacility;
 	}
 }

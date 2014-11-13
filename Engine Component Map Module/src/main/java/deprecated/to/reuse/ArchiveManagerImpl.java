@@ -15,11 +15,7 @@ public class ArchiveManagerImpl extends Manager {
 	/** {@inheritDoc} */
 	public void archiveMap(Board mapToArchive) {
 
-		log.info(this.getClass(), "Archiving old map...");
-
 		archivedMaps.add(mapToArchive);
-
-		log.info(this.getClass(), "Map archived successfully!");
 
 	}
 
