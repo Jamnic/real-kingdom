@@ -16,6 +16,7 @@
 
 	<dependencies>
 
+		<!-- === PROJECT === -->
 		<dependency>
 			<groupId>real.kingdom</groupId>
 			<artifactId>persistence.component</artifactId>
