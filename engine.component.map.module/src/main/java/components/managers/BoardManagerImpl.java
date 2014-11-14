@@ -41,7 +41,8 @@ public class BoardManagerImpl extends Manager implements BoardManager {
 
 		Board board = assembleBoardFromBoardDto(boardName, boardDto);
 
-		return boardDao.save(board);
+//		return boardDao.save(board);
+		return board;
 	}
 
 	/** {@inheritDoc} */

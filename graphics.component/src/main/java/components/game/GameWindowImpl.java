@@ -5,6 +5,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import model.World;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,23 +32,31 @@ public class GameWindowImpl extends JFrame implements GameWindow {
 	public MainGamePanel mainGamePanel;
 
 	/** {@inheritDoc} */
-	@Override
 	public void initialize() {
+		
+		World[] availableWorlds = worldService.getAvailableWorlds();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setMaximumSize(new Dimension(100, 200));
-		setMinimumSize(new Dimension(100, 200));
+		Dimension dimension = new Dimension(100, 200);
+		setMaximumSize(dimension);
+		setMinimumSize(dimension);
 		setVisible(true);
 		setBackground(new Color(0, 0, 255));
 
+		worldCreationPanel = new WorldCreationPanel(this);
+		worldCreationPanel.setVisible(false);
+		worldCreationPanel.setPreferredSize(dimension);
+		worldCreationPanel.setSize(dimension);
+		
 		mainGamePanel = new MainGamePanel(this);
+		mainGamePanel.setVisible(true);
+		mainGamePanel.setPreferredSize(dimension);
+		mainGamePanel.setSize(dimension);
+
+		this.add(worldCreationPanel);
 		this.add(mainGamePanel);
 		
-//		worldCreationPanel = new WorldCreationPanel(this);
-//		this.add(worldCreationPanel);
 		
-		mainGamePanel.setVisible(true);
-//		worldCreationPanel.setVisible(false);
 
 	}
 

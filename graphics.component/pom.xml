@@ -3,9 +3,13 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>real.kingdom</groupId>
+	<parent>
+		<groupId>real.kingdom</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
 	<artifactId>graphics.component</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 
 	<name>Graphics component</name>
 

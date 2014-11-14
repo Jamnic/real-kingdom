@@ -10,9 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import components.game.GameWindowImpl;
-
 import model.World;
+
+import components.game.GameWindowImpl;
 
 public class MainGamePanel extends JPanel {
 
@@ -46,29 +46,23 @@ public class MainGamePanel extends JPanel {
 		worldsList = new JList<World>();
 		worldsList.addMouseListener(new MouseListener() {
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				selectedWorld = worldsList.getSelectedValue();
 			}
+
+			public void mousePressed(MouseEvent e) {
+			}
+
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			public void mouseExited(MouseEvent e) {
+			}
 		});
 
-		worldsList.setListData(gameWindow.worldService.getAvailableWorlds());
 		return worldsList;
 	}
 
@@ -76,7 +70,6 @@ public class MainGamePanel extends JPanel {
 		final JButton removeSelectedWorldButton = new JButton("Remove selected world");
 		removeSelectedWorldButton.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(selectedWorld);
 				gameWindow.worldService.deleteWorld(selectedWorld.getId());
@@ -91,7 +84,6 @@ public class MainGamePanel extends JPanel {
 		final JButton playSelectedWorldButton = new JButton("Play selected world");
 		playSelectedWorldButton.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(selectedWorld);
 			}
@@ -104,7 +96,6 @@ public class MainGamePanel extends JPanel {
 		JButton createNewWorldButton = new JButton("Create new world");
 		createNewWorldButton.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				gameWindow.mainGamePanel.setVisible(false);
 				gameWindow.worldCreationPanel.setVisible(true);

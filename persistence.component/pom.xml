@@ -10,7 +10,6 @@
 	</parent>
 
 	<artifactId>persistence.component</artifactId>
-	<packaging>jar</packaging>
 
 	<name>Persistence Component</name>
 

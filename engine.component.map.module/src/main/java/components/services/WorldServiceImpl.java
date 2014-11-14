@@ -8,13 +8,11 @@ import model.enums.WorldSize;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import api.managers.WorldManager;
 import api.services.WorldService;
 
 @Service
-@Transactional
 public class WorldServiceImpl implements WorldService {
 
 	@Autowired
@@ -35,13 +33,15 @@ public class WorldServiceImpl implements WorldService {
 
 	@Override
 	public void deleteWorld(Long id) {
-		// TODO Auto-generated method stub
+		
+		worldManager.deleteWorld(id);
 
 	}
 
 	@Override
-	public void createNewWorld(String text, WorldSize worldSize, BoardSize boardSize) {
-		// TODO Auto-generated method stub
+	public void createNewWorld(String worldName, WorldSize worldSize, BoardSize boardSize) {
+
+		worldManager.createNewWorld(worldName, worldSize, boardSize);
 
 	}
 

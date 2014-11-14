@@ -12,7 +12,6 @@
 
 	<import resource="engine-component-map-module-spring.xml"/>
 
-	<tx:annotation-driven />
 	<context:annotation-config />
 	<context:component-scan base-package="components.*" />
 

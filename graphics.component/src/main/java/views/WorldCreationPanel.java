@@ -21,17 +21,17 @@ public class WorldCreationPanel extends JPanel {
 
 		this.setBackground(new Color(255, 0, 0));
 
-//		final JTextField nameField = nameField();
-//		final JList<WorldSize> worldSizesList = new JList<WorldSize>(WorldSize.values());
-//		final JList<BoardSize> boardSizesList = new JList<BoardSize>(BoardSize.values());
-//		JButton createButton = createButton(gameWindow, nameField, worldSizesList, boardSizesList);
-//		JButton returnButton = returnButton(gameWindow);
+		final JTextField nameField = nameField();
+		final JList<WorldSize> worldSizesList = new JList<WorldSize>(WorldSize.values());
+		final JList<BoardSize> boardSizesList = new JList<BoardSize>(BoardSize.values());
+		JButton createButton = createButton(gameWindow, nameField, worldSizesList, boardSizesList);
+		JButton returnButton = returnButton(gameWindow);
 
-//		this.add(nameField);
-//		this.add(worldSizesList);
-//		this.add(boardSizesList);
-//		this.add(createButton);
-//		this.add(returnButton);
+		this.add(nameField);
+		this.add(worldSizesList);
+		this.add(boardSizesList);
+		this.add(createButton);
+		this.add(returnButton);
 
 	}
 
@@ -48,7 +48,6 @@ public class WorldCreationPanel extends JPanel {
 		JButton createButton = new JButton("Create world");
 		createButton.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				String text = nameField.getText();
 				int worldIndex = worldSizesList.getSelectedIndex();
@@ -72,7 +71,6 @@ public class WorldCreationPanel extends JPanel {
 		JButton returnButton = new JButton("Return");
 		returnButton.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				gameWindow.remove(gameWindow.worldCreationPanel);

@@ -12,7 +12,7 @@ import components.game.GameWindowImpl;
 /**
  * This is a place, where {@link Game} can be run.
  */
-@ContextConfiguration(locations = { "/engine-component-map-module-spring.xml" })
+@ContextConfiguration(locations = { "/graphics-component-spring.xml" })
 public final class GameRunner {
 
 	/* ========== Main ========== */

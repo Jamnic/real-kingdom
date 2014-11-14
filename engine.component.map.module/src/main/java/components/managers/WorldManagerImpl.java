@@ -2,6 +2,10 @@ package components.managers;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+
 import model.Board;
 import model.Field;
 import model.World;
@@ -20,7 +24,6 @@ import api.managers.WorldManager;
  * Default implementation of {@link WorldManager}.
  */
 @Component
-@Transactional
 public class WorldManagerImpl implements WorldManager {
 
 	@Autowired
@@ -28,7 +31,10 @@ public class WorldManagerImpl implements WorldManager {
 
 	@Autowired
 	private WorldDao worldDao;
-	
+
+	@Autowired
+	private EntityManagerFactory emf;
+
 	/* ========== Public ========== */
 	/** {@inheritDoc} */
 	@Override
@@ -42,7 +48,20 @@ public class WorldManagerImpl implements WorldManager {
 		newWorld.setWorldSize(worldSize);
 		newWorld.setMainBoard(mainBoard);
 
-		return worldDao.save(newWorld);
+		System.out.println("SADASDASdASD");
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			World save = worldDao.save(newWorld);
+			tx.commit();
+
+			return save;
+		} catch (Exception e) {
+			tx.rollback();
+		}
+
+		return null;
 	}
 
 	public void printSelectedWorld(long worldId) {
@@ -66,9 +85,9 @@ public class WorldManagerImpl implements WorldManager {
 
 	@Override
 	public void deleteWorld(Long id) {
-		
+
 		worldDao.delete(id);
-		
+
 	}
 
 	/* ========== Private ========== */
