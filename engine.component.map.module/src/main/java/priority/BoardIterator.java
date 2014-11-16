@@ -2,17 +2,17 @@ package priority;
 
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.List;
 
 import model.Board;
 import model.Field;
-import dto.BoardDto;
-import dto.CoordsDto;
-import dto.FieldDto;
+import model.FieldColumn;
+import model.embedded.Coords;
 
 /**
  * Class which helps with iteration over 2D array in {@link Board}.
  */
-public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDto>, Serializable {
+public final class BoardIterator implements Iterator<Field>, Iterable<Field>, Serializable {
 
 	/* ========== Public ========== */
 	/**
@@ -20,7 +20,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	 * 
 	 * @param board
 	 */
-	public BoardIterator(BoardDto board) {
+	public BoardIterator(Board board) {
 		super();
 
 		this.iteratedBoard = board;
@@ -35,9 +35,9 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	 * @return Next {@link Field} in order.
 	 */
 	@Override
-	public FieldDto next() {
+	public Field next() {
 
-		return iterateOnHeightAndWidth(iteratedBoard.getBoard(), iteratedBoard.getBoardSize().getHeight(),
+		return iterateOnHeightAndWidth(iteratedBoard.getFieldColumns(), iteratedBoard.getBoardSize().getHeight(),
 				iteratedBoard.getBoardSize().getWidth());
 
 	}
@@ -59,9 +59,9 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	 * 
 	 * @return Current position of iterator using{@link CoordsDto} object.
 	 */
-	public CoordsDto getCurrentCoords() {
+	public Coords getCurrentCoords() {
 
-		return new CoordsDto(currentXPositionOfIterator, currentYPositionOfIterator);
+		return new Coords(currentXPositionOfIterator, currentYPositionOfIterator);
 
 	}
 
@@ -72,7 +72,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	 */
 	public BoardIterator resetIterator() {
 
-		setIteratorOn(new CoordsDto(0, 0));
+		setIteratorOn(new Coords(0, 0));
 
 		return this;
 
@@ -84,7 +84,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	 * @param coords
 	 *            - {@link CoordsDto} on which iterator should be set on.
 	 */
-	public void setIteratorOn(CoordsDto coords) {
+	public void setIteratorOn(Coords coords) {
 
 		setCurrentXPositionOfIterator(coords.getX());
 		setCurrentYPositionOfIterator(coords.getY());
@@ -92,7 +92,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	}
 
 	@Override
-	public Iterator<FieldDto> iterator() {
+	public Iterator<Field> iterator() {
 		return this;
 	}
 
@@ -108,7 +108,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 	private static final long serialVersionUID = 5642501676714628479L;
 	private int currentXPositionOfIterator;
 	private int currentYPositionOfIterator;
-	private BoardDto iteratedBoard;
+	private Board iteratedBoard;
 
 	private void setCurrentXPositionOfIterator(final int newXPosition) {
 		if (newXPosition < 0 && newXPosition >= iteratedBoard.getBoardSize().getWidth())
@@ -126,7 +126,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 		this.currentYPositionOfIterator = newYPosition;
 	}
 
-	private FieldDto iterateOnHeightAndWidth(FieldDto[][] array, final int maximumHeight, final int maximumWidth) {
+	private Field iterateOnHeightAndWidth(List<FieldColumn> array, final int maximumHeight, final int maximumWidth) {
 
 		if (checkIfCurrentReachedMaximum(currentYPositionOfIterator, maximumHeight)) {
 			// Iterate on another row.
@@ -137,11 +137,11 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 			// Get another Field in row.
 
 			setCurrentYPositionOfIterator(currentYPositionOfIterator + 1);
-			return array[currentXPositionOfIterator][currentYPositionOfIterator];
+			return array.get(currentXPositionOfIterator).getFields().get(currentYPositionOfIterator);
 		}
 	}
 
-	private FieldDto iterateOnWidth(FieldDto[][] array, final int maximumWidth) {
+	private Field iterateOnWidth(List<FieldColumn> array, final int maximumWidth) {
 
 		if (checkIfCurrentReachedMaximum(currentXPositionOfIterator, maximumWidth))
 
@@ -150,7 +150,7 @@ public final class BoardIterator implements Iterator<FieldDto>, Iterable<FieldDt
 			// Iterate on another column.
 
 			setCurrentXPositionOfIterator(currentXPositionOfIterator + 1);
-			return array[currentXPositionOfIterator][currentYPositionOfIterator];
+			return array.get(currentXPositionOfIterator).getFields().get(currentYPositionOfIterator);
 		}
 	}
 

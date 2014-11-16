@@ -1,11 +1,15 @@
 package model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import model.enums.BoardSize;
@@ -28,8 +32,8 @@ public class Board {
 	@Column
 	private String name;
 
-	@Column
-	private Field[][] board;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<FieldColumn> fieldColumns;
 
 	@Enumerated
 	private BoardSize boardSize;
@@ -51,12 +55,12 @@ public class Board {
 		this.name = name;
 	}
 
-	public Field[][] getBoard() {
-		return board;
+	public List<FieldColumn> getFieldColumns() {
+		return fieldColumns;
 	}
 
-	public void setBoard(Field[][] board) {
-		this.board = board;
+	public void setFieldColumns(List<FieldColumn> fieldColumns) {
+		this.fieldColumns = fieldColumns;
 	}
 
 	public BoardSize getBoardSize() {

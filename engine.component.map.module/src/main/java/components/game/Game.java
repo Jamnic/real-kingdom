@@ -1,15 +1,12 @@
 package components.game;
 
-import model.enums.BoardSize;
-import model.enums.WorldSize;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import components.utilities.LoggerUtility;
-
 import api.managers.WorldManager;
 import architecture.GameThread;
+
+import components.utilities.LoggerUtility;
 
 /**
  * Main class of whole {@link Game}. It initializes work of all components, and invokes tick and render commands for all
@@ -30,11 +27,11 @@ public final class Game extends GameThread {
 	 */
 	public void initialize() {
 		
-		log.info(Game.class, "Initializing new world...");
-		
-		worldManager.createNewWorld("Alicia", WorldSize.TINY, BoardSize.MEDIUM);
-		
-		log.info(Game.class, "World successfully created!");
+//		log.info(Game.class, "Initializing new world...");
+//		
+//		worldManager.createNewWorld("Alicia", WorldSize.TINY, BoardSize.MEDIUM);
+//		
+//		log.info(Game.class, "World successfully created!");
 	}
 
 	public void render() {

@@ -1,19 +1,19 @@
 package components.game;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-
-import model.World;
+import javax.swing.JPanel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import views.MainGamePanel;
-import views.WorldCreationPanel;
 import api.game.GameWindow;
-import api.services.WorldService;
+
+import components.utilities.LoggerUtility;
+import components.views.MainGamePanel;
+import components.views.ViewPanel;
+import components.views.WorldCreationPanel;
 
 /**
  * Default implementation of {@link GameWindow}.
@@ -22,41 +22,52 @@ import api.services.WorldService;
 public class GameWindowImpl extends JFrame implements GameWindow {
 
 	@Autowired
+	private LoggerUtility log;
+
+	@Autowired
 	private Game game;
 
 	@Autowired
-	public WorldService worldService;
+	private ViewPanel viewPanel;
+
+	@Autowired
+	private MainGamePanel mainGamePanel;
+
+	@Autowired
+	private WorldCreationPanel worldCreationPanel;
 
 	/* ========== Public ========== */
-	public WorldCreationPanel worldCreationPanel;
-	public MainGamePanel mainGamePanel;
-
 	/** {@inheritDoc} */
+	@Override
 	public void initialize() {
-		
-		World[] availableWorlds = worldService.getAvailableWorlds();
+
+		log.info(GameWindowImpl.class, "Initializing game window...");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension dimension = new Dimension(100, 200);
+
+		Dimension dimension = new Dimension(500, 400);
+
 		setMaximumSize(dimension);
 		setMinimumSize(dimension);
 		setVisible(true);
-		setBackground(new Color(0, 0, 255));
 
-		worldCreationPanel = new WorldCreationPanel(this);
-		worldCreationPanel.setVisible(false);
-		worldCreationPanel.setPreferredSize(dimension);
-		worldCreationPanel.setSize(dimension);
-		
-		mainGamePanel = new MainGamePanel(this);
-		mainGamePanel.setVisible(true);
-		mainGamePanel.setPreferredSize(dimension);
-		mainGamePanel.setSize(dimension);
+		JPanel contentPane = new JPanel();
 
-		this.add(worldCreationPanel);
-		this.add(mainGamePanel);
-		
-		
+		contentPane.setOpaque(true);
+
+		worldCreationPanel.initialize(dimension);
+		mainGamePanel.initialize(dimension);
+		viewPanel.initialize(dimension);
+
+		mainGamePanel.showPanel();
+
+		contentPane.add(mainGamePanel);
+		contentPane.add(viewPanel);
+		contentPane.add(worldCreationPanel);
+
+		setContentPane(contentPane);
+
+		log.info(GameWindowImpl.class, "Game window initialized!");
 
 	}
 

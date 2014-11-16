@@ -13,6 +13,15 @@ import model.Board;
 @Embeddable
 public class Coords {
 
+	/* ========== Constructors ========== */
+	public Coords() {
+	}
+
+	public Coords(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	/* ========== Fields ========== */
 	@Column
 	private int x;

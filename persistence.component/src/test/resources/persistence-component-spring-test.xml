@@ -15,7 +15,7 @@
 	<context:component-scan base-package="repository" />
 
 	<jpa:repositories base-package="repository"
-		entity-manager-factory-ref="entityManagerFactory"
+		entity-manager-factory-ref="testEntityManagerFactory"
 		transaction-manager-ref="transactionManager">
 	</jpa:repositories>
 
@@ -29,13 +29,13 @@
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="entityManagerFactory" ref="testEntityManagerFactory" />
 	</bean>
 
 	<util:properties id="hibernateProperties" location="classpath:/hibernate.properties"
 		local-override="true" />
 
-	<bean id="entityManagerFactory"
+	<bean id="testEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="entityManager" />
 		<property name="dataSource" ref="dataSource" />

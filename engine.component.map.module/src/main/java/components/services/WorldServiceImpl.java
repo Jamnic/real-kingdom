@@ -1,7 +1,5 @@
 package components.services;
 
-import java.util.List;
-
 import model.World;
 import model.enums.BoardSize;
 import model.enums.WorldSize;
@@ -21,19 +19,14 @@ public class WorldServiceImpl implements WorldService {
 	/* ========== Public ========== */
 	@Override
 	public World[] getAvailableWorlds() {
-		List<World> availableWorlds = worldManager.getAvailableWorlds();
 
-		int size = availableWorlds.size();
-		
-		System.out.println(size);
+		return worldManager.getAvailableWorlds();
 
-		return size > 10 ? availableWorlds.subList(0, 10).toArray(new World[10]) : availableWorlds
-				.toArray(new World[size]);
 	}
 
 	@Override
 	public void deleteWorld(Long id) {
-		
+
 		worldManager.deleteWorld(id);
 
 	}

@@ -2,12 +2,9 @@ package components.managers;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-
 import model.Board;
 import model.Field;
+import model.FieldColumn;
 import model.World;
 import model.enums.BoardSize;
 import model.enums.WorldSize;
@@ -24,6 +21,7 @@ import api.managers.WorldManager;
  * Default implementation of {@link WorldManager}.
  */
 @Component
+@Transactional
 public class WorldManagerImpl implements WorldManager {
 
 	@Autowired
@@ -31,9 +29,6 @@ public class WorldManagerImpl implements WorldManager {
 
 	@Autowired
 	private WorldDao worldDao;
-
-	@Autowired
-	private EntityManagerFactory emf;
 
 	/* ========== Public ========== */
 	/** {@inheritDoc} */
@@ -48,28 +43,15 @@ public class WorldManagerImpl implements WorldManager {
 		newWorld.setWorldSize(worldSize);
 		newWorld.setMainBoard(mainBoard);
 
-		System.out.println("SADASDASdASD");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		try {
-			tx.begin();
-			World save = worldDao.save(newWorld);
-			tx.commit();
-
-			return save;
-		} catch (Exception e) {
-			tx.rollback();
-		}
-
-		return null;
+		return worldDao.save(newWorld);
 	}
 
 	public void printSelectedWorld(long worldId) {
 
 		World world = worldDao.getOne(worldId);
 
-		for (Field[] array : world.getMainBoard().getBoard()) {
-			for (Field field : array) {
+		for (FieldColumn array : world.getMainBoard().getFieldColumns()) {
+			for (Field field : array.getFields()) {
 				System.out.print(field.getSprite().getImage());
 			}
 		}
@@ -77,9 +59,14 @@ public class WorldManagerImpl implements WorldManager {
 	}
 
 	@Override
-	public List<World> getAvailableWorlds() {
+	public World[] getAvailableWorlds() {
 
-		return worldDao.findAll();
+		List<World> availableWorlds = worldDao.findAll();
+
+		int size = availableWorlds.size();
+
+		return size > 10 ? availableWorlds.subList(0, 10).toArray(new World[10]) : availableWorlds
+				.toArray(new World[size]);
 
 	}
 

@@ -1,7 +1,5 @@
 package api.managers;
 
-import java.util.List;
-
 import model.Board;
 import model.World;
 import model.enums.BoardSize;
@@ -26,7 +24,7 @@ public interface WorldManager {
 	 */
 	World createNewWorld(String worldName, WorldSize worldSize, BoardSize mainBoardSize);
 
-	List<World> getAvailableWorlds();
+	World[] getAvailableWorlds();
 
 	void deleteWorld(Long id);
 

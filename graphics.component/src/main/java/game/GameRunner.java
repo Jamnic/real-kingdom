@@ -2,43 +2,39 @@ package game;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-
-import api.game.MainGameThread;
 
 import components.game.Game;
 import components.game.GameWindowImpl;
+import components.utilities.LoggerUtility;
 
 /**
  * This is a place, where {@link Game} can be run.
  */
-@ContextConfiguration(locations = { "/graphics-component-spring.xml" })
 public final class GameRunner {
 
-	/* ========== Main ========== */
-	public static void main(String[] args) {
+	public GameRunner() {
 
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
-				"/graphics-component-spring.xml");
+				"/META-INF/graphics-component-spring.xml");
+
+		LoggerUtility log = (LoggerUtility) context.getBean("loggerUtility");
+		log.info(GameRunner.class, "Starting game");
 
 		Game game = (Game) context.getBean("game");
 		GameWindowImpl gameWindow = (GameWindowImpl) context.getBean("gameWindowImpl");
-		MainGameThread mainGameThread = (MainGameThread) context.getBean("mainGameThreadImpl");
+		// MainGameThread mainGameThread = (MainGameThread) context.getBean("mainGameThreadImpl");
 
-		try {
-			gameWindow.initialize();
+		gameWindow.initialize();
 
-//			game.initialize();
-//
-//			mainGameThread.start();
-//
-//			mainGameThread.stop();
+		game.initialize();
+		log.info(GameRunner.class, "Game started");
 
-//		} catch (InterruptedException e) {
-//			// Game crash!
-		} finally {
-			context.close();
-		}
+		// context.close(); // Nie zamykac bo sie entitymanager wypieprzy
+
+	}
+
+	/* ========== Main ========== */
+	public static void main(String[] args) {
 
 		new GameRunner();
 	}

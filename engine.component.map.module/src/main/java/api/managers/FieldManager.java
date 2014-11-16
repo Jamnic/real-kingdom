@@ -1,14 +1,11 @@
 package api.managers;
 
-import dto.CoordsDto;
-import dto.FieldDto;
 import model.Field;
+import model.embedded.Coords;
 import model.enums.TerrainType;
 
 public interface FieldManager {
 
-	Field createNewField(TerrainType type, CoordsDto coords);
-
-	Field[][] assembleFieldFromFieldDto(FieldDto[][] board);
+	Field createNewField(TerrainType type, Coords coords);
 
 }

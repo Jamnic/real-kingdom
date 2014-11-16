@@ -1,5 +1,12 @@
 package components.algorithms;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Board;
+import model.Field;
+import model.FieldColumn;
+import model.embedded.Coords;
 import model.enums.BoardSize;
 import model.enums.TerrainType;
 
@@ -11,12 +18,8 @@ import api.managers.BoardManager;
 import api.managers.FieldManager;
 
 import com.google.common.base.Optional;
-
 import components.utilities.DiceUtility;
 import components.utilities.LoggerUtility;
-import dto.BoardDto;
-import dto.CoordsDto;
-import dto.FieldDto;
 
 /**
  * Default implementation of {@link TerrainGeneratorAlgorithm}.
@@ -29,21 +32,21 @@ public class TerrainGeneratorAlgorithmImpl implements TerrainGeneratorAlgorithm 
 
 	@Autowired
 	private FieldManager fieldManager;
-	
+
 	@Autowired
 	private DiceUtility dice;
-	
+
 	@Autowired
 	private LoggerUtility log;
 
 	/* ========== Public ========== */
 	/** {@inheritDoc} */
 	@Override
-	public BoardDto createBoardDtoWithGeneratedTerrain(BoardSize boardSize) {
+	public Board createBoardWithGeneratedTerrain(BoardSize boardSize) {
 
 		log.info(TerrainGeneratorAlgorithmImpl.class, "Initializing worlds with oceans...");
 		initializeBoardWithOceans(boardSize);
-		
+
 		log.info(TerrainGeneratorAlgorithmImpl.class, "Creating wastelands...");
 		generateSpreadTerrain(5, 10, TerrainType.WASTELANDS);
 		log.info(TerrainGeneratorAlgorithmImpl.class, "Creating mountains...");
@@ -52,31 +55,40 @@ public class TerrainGeneratorAlgorithmImpl implements TerrainGeneratorAlgorithm 
 		generateSpreadTerrain(20, 5, TerrainType.HILLS);
 		log.info(TerrainGeneratorAlgorithmImpl.class, "Creating savannah...");
 		generateSpreadTerrain(20, 7, TerrainType.SAVANNAH);
-		
-		return boardDto;
+
+		return board;
 	}
 
 	/* ========== Private ========== */
 	private static final int MAX_MAGNITUDE = 100;
 	private static final int MAX_FREQUENCY = 100;
 
-	private BoardDto boardDto;
+	private Board board;
 
 	private void initializeBoardWithOceans(BoardSize boardSize) {
 
 		int boardWidth = boardSize.getWidth();
 		int boardHeight = boardSize.getHeight();
 
-		FieldDto[][] newArray = new FieldDto[boardWidth][];
+		List<FieldColumn> newArray = new ArrayList<FieldColumn>(boardWidth);
 
 		for (int i = 0; i < boardWidth; ++i) {
-			newArray[i] = new FieldDto[boardHeight];
 
-			for (int j = 0; j < boardHeight; ++j)
-				newArray[i][j] = new FieldDto(TerrainType.OCEANS, new CoordsDto(i, j));
+			FieldColumn fieldColumn = new FieldColumn();
+			newArray.add(fieldColumn);
+			fieldColumn.setFields(new ArrayList<Field>(boardHeight));
+
+			for (int j = 0; j < boardHeight; ++j) {
+				Field field = new Field();
+				field.setTerrainType(TerrainType.OCEANS);
+				field.setCoords(new Coords(i, j));
+				fieldColumn.getFields().add(field);
+			}
 		}
 
-		boardDto = new BoardDto(newArray, boardSize);
+		board = new Board();
+		board.setFieldColumns(newArray);
+		board.setBoardSize(boardSize);
 	}
 
 	private void generateSpreadTerrain(int seedFrequency, int initialMagnitude, TerrainType terrain) {
@@ -90,7 +102,7 @@ public class TerrainGeneratorAlgorithmImpl implements TerrainGeneratorAlgorithm 
 			return;
 		}
 
-		for (FieldDto field : boardManager.getIterator(boardDto)) {
+		for (Field field : boardManager.getIterator(board)) {
 
 			boolean fieldCanBeChanged = field.getTerrainType() == TerrainType.OCEANS;
 			boolean someLuck = dice.check(MAX_FREQUENCY / seedFrequency);
@@ -100,10 +112,10 @@ public class TerrainGeneratorAlgorithmImpl implements TerrainGeneratorAlgorithm 
 		}
 	}
 
-	private void setTerrainAndSpreadToNeighbours(int magnitude, TerrainType terrain, FieldDto field) {
+	private void setTerrainAndSpreadToNeighbours(int magnitude, TerrainType terrain, Field field) {
 
 		field.setTerrainType(terrain);
-		CoordsDto coords = field.getCoordsDto();
+		Coords coords = field.getCoords();
 
 		if (magnitude == 0)
 			return;
@@ -111,15 +123,15 @@ public class TerrainGeneratorAlgorithmImpl implements TerrainGeneratorAlgorithm 
 		int x = coords.getX();
 		int y = coords.getY();
 
-		spreadFurtherToNeighbour(magnitude, terrain, new CoordsDto(x + 1, y + 0));
-		spreadFurtherToNeighbour(magnitude, terrain, new CoordsDto(x + 0, y + 1));
-		spreadFurtherToNeighbour(magnitude, terrain, new CoordsDto(x + 0, y - 1));
-		spreadFurtherToNeighbour(magnitude, terrain, new CoordsDto(x - 1, y + 0));
+		spreadFurtherToNeighbour(magnitude, terrain, new Coords(x + 1, y + 0));
+		spreadFurtherToNeighbour(magnitude, terrain, new Coords(x + 0, y + 1));
+		spreadFurtherToNeighbour(magnitude, terrain, new Coords(x + 0, y - 1));
+		spreadFurtherToNeighbour(magnitude, terrain, new Coords(x - 1, y + 0));
 	}
 
-	private void spreadFurtherToNeighbour(int magnitude, TerrainType terrain, CoordsDto coordsDto) {
+	private void spreadFurtherToNeighbour(int magnitude, TerrainType terrain, Coords coords) {
 
-		Optional<FieldDto> fieldOptional = boardManager.getFieldDto(boardDto, coordsDto);
+		Optional<Field> fieldOptional = boardManager.getField(board, coords);
 
 		if (!fieldOptional.isPresent())
 			return;

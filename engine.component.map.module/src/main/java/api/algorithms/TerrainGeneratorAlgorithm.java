@@ -1,7 +1,7 @@
 package api.algorithms;
 
+import model.Board;
 import model.enums.BoardSize;
-import dto.BoardDto;
 
 /**
  * Interface for algorithm of generating terrain.
@@ -15,6 +15,6 @@ public interface TerrainGeneratorAlgorithm {
 	 *            - size of desired {@link Board}.
 	 * @return {@link BoardDto} with generated terrain.
 	 */
-	BoardDto createBoardDtoWithGeneratedTerrain(BoardSize boardSize);
+	Board createBoardWithGeneratedTerrain(BoardSize boardSize);
 
 }

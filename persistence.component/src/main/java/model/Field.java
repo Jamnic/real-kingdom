@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -51,6 +52,9 @@ public class Field {
 
 	@Enumerated
 	private ProductionFacility productionFacility;
+
+	@ManyToOne
+	private Board board;
 
 	/* ========== Properties ========== */
 	public Long getId() {

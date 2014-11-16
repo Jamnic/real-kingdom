@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 import repository.FieldDao;
 import api.managers.BoardManager;
 import api.managers.FieldManager;
-import dto.CoordsDto;
-import dto.FieldDto;
 
 @Component
 public class FieldManagerImpl implements FieldManager {
@@ -26,11 +24,9 @@ public class FieldManagerImpl implements FieldManager {
 
 	/* ========== Public ========== */
 	@Override
-	public Field createNewField(TerrainType type, CoordsDto coordsDto) {
+	public Field createNewField(TerrainType type, Coords coords) {
 
 		Field field = new Field();
-
-		Coords coords = assembleCoordsFromCoordsDto(coordsDto);
 
 		field.setTerrainType(type);
 		field.setCoords(coords);
@@ -40,24 +36,6 @@ public class FieldManagerImpl implements FieldManager {
 		return fieldDao.save(field);
 	}
 
-	@Override
-	public Field[][] assembleFieldFromFieldDto(FieldDto[][] board) {
-
-//		for (FieldDto[] fieldArray : board)
-//			;
-
-		return null;
-	}
-
 	/* ========== Private ========== */
-	private Coords assembleCoordsFromCoordsDto(CoordsDto coordsDto) {
-
-		Coords coords = new Coords();
-
-		coords.setX(coordsDto.getX());
-		coords.setY(coordsDto.getY());
-
-		return coords;
-	}
 
 }

@@ -1,14 +1,12 @@
 package api.managers;
 
 import model.Board;
+import model.Field;
 import model.World;
+import model.embedded.Coords;
 import model.enums.BoardSize;
 
 import com.google.common.base.Optional;
-
-import dto.BoardDto;
-import dto.CoordsDto;
-import dto.FieldDto;
 
 public interface BoardManager {
 
@@ -32,8 +30,8 @@ public interface BoardManager {
 	 */
 	String createBoardName(String worldName);
 
-	Iterable<FieldDto> getIterator(BoardDto board);
+	Iterable<Field> getIterator(Board board);
 
-	Optional<FieldDto> getFieldDto(BoardDto boardDto, CoordsDto coordsDto);
+	Optional<Field> getField(Board board, Coords coords);
 
 }

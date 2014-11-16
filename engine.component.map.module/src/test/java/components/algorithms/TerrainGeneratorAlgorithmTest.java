@@ -1,5 +1,7 @@
 package components.algorithms;
 
+import model.Board;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +18,6 @@ import api.managers.FieldManager;
 
 import components.utilities.DiceUtility;
 import components.utilities.LoggerUtility;
-
-import dto.BoardDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/engine-component-map-module-spring.xml" })
@@ -39,7 +39,7 @@ public class TerrainGeneratorAlgorithmTest {
 	private LoggerUtility log;
 
 	@Captor
-	private ArgumentCaptor<BoardDto> boardDtoCaptor;
+	private ArgumentCaptor<Board> boardCaptor;
 
 	@Before
 	public void init() {
@@ -49,19 +49,18 @@ public class TerrainGeneratorAlgorithmTest {
 	@Test
 	public void testCreateBoardDtoWithGeneratedTerrain() {
 
-//		// Given
-//		BoardSize boardSize = BoardSize.BIG;
-//
-//		when(boardManager.getIterator(boardDtoCaptor.capture())).thenReturn(
-//				new BoardIterator(boardDtoCaptor.getValue()));
-//
-//		// When
-//		BoardDto result = testedAlgorithm.createBoardDtoWithGeneratedTerrain(boardSize);
-//
-//		// Then
-//		assertNotNull(result);
-//		assertEquals(result.getBoardSize(), boardSize);
-		
+		// // Given
+		// BoardSize boardSize = BoardSize.BIG;
+		//
+		// when(boardManager.getIterator(boardDtoCaptor.capture())).thenReturn(
+		// new BoardIterator(boardDtoCaptor.getValue()));
+		//
+		// // When
+		// BoardDto result = testedAlgorithm.createBoardDtoWithGeneratedTerrain(boardSize);
+		//
+		// // Then
+		// assertNotNull(result);
+		// assertEquals(result.getBoardSize(), boardSize);
 
 	}
 
