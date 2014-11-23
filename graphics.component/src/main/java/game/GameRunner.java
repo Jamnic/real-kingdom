@@ -35,7 +35,6 @@ public final class GameRunner {
 
 	/* ========== Main ========== */
 	public static void main(String[] args) {
-
 		new GameRunner();
 	}
 

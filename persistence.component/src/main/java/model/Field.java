@@ -54,7 +54,7 @@ public class Field {
 	private ProductionFacility productionFacility;
 
 	@ManyToOne
-	private Board board;
+	private FieldColumn fieldColumn;
 
 	/* ========== Properties ========== */
 	public Long getId() {
@@ -119,5 +119,13 @@ public class Field {
 
 	public void setProductionFacility(ProductionFacility productionFacility) {
 		this.productionFacility = productionFacility;
+	}
+
+	public FieldColumn getFieldColumn() {
+		return fieldColumn;
+	}
+
+	public void setFieldColumn(FieldColumn fieldColumn) {
+		this.fieldColumn = fieldColumn;
 	}
 }

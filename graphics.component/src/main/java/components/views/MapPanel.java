@@ -13,7 +13,6 @@ import model.enums.TerrainType;
 public class MapPanel extends JPanel {
 
 	public void setBoard(Board board) {
-		System.out.println("SET!");
 		this.board = board;
 	}
 
@@ -30,9 +29,11 @@ public class MapPanel extends JPanel {
 	}
 
 	private void drawTerrain(TerrainType type, int i, int j, Graphics g) {
+		
+		final int length = 400 / 128;
 
 		g.setColor(determineColor(type));
-		g.drawRect(i, j, 5, 5);
+		g.drawRect(i * length, j * length, length, length);
 
 	}
 

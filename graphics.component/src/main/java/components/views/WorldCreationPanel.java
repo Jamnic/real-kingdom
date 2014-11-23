@@ -87,8 +87,10 @@ public class WorldCreationPanel extends AbstractPanel {
 				int worldIndex = worldSizesList.getSelectedIndex();
 				int boardIndex = boardSizesList.getSelectedIndex();
 
-				if (text != null && !text.isEmpty() && worldIndex != -1 && boardIndex != -1)
+				if (text != null && !text.isEmpty() && worldIndex != -1 && boardIndex != -1) {
 					worldService.createNewWorld(text, WorldSize.values()[worldIndex], BoardSize.values()[boardIndex]);
+					returnToMainGamePanel();
+				}
 			}
 		});
 
@@ -101,12 +103,16 @@ public class WorldCreationPanel extends AbstractPanel {
 
 		returnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				hidePanel();
-				mainGamePanel.showPanel();
+				returnToMainGamePanel();
 			}
 		});
 
 		add(returnButton);
+	}
+
+	private void returnToMainGamePanel() {
+		hidePanel();
+		mainGamePanel.showPanel();
 	}
 
 }

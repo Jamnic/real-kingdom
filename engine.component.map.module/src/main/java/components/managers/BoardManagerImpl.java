@@ -1,7 +1,10 @@
 package components.managers;
 
+import java.util.List;
+
 import model.Board;
 import model.Field;
+import model.FieldColumn;
 import model.embedded.Coords;
 import model.enums.BoardSize;
 import model.enums.TerrainType;
@@ -11,12 +14,14 @@ import org.springframework.stereotype.Component;
 
 import priority.BoardIterator;
 import repository.BoardDao;
+import repository.FieldColumnDao;
 import api.algorithms.TerrainGeneratorAlgorithm;
 import api.managers.BoardManager;
 import api.managers.FieldManager;
 import architecture.Manager;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 
 @Component
 public class BoardManagerImpl extends Manager implements BoardManager {
@@ -26,6 +31,9 @@ public class BoardManagerImpl extends Manager implements BoardManager {
 
 	@Autowired
 	private FieldManager fieldManager;
+	
+	@Autowired
+	private FieldColumnDao fieldColumnDao;
 
 	@Autowired
 	private TerrainGeneratorAlgorithm terrainGeneratorAlgorithm;
@@ -38,7 +46,7 @@ public class BoardManagerImpl extends Manager implements BoardManager {
 		Board board = terrainGeneratorAlgorithm.createBoardWithGeneratedTerrain(boardSize);
 
 		board.setName(boardName);
-
+		
 		return boardDao.save(board);
 	}
 

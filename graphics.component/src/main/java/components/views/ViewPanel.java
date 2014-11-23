@@ -41,7 +41,7 @@ public class ViewPanel extends AbstractPanel {
 		mainPanel = new MapPanel();
 
 		mainPanel.setBackground(new Color(0, 100, 100));
-		mainPanel.setBounds(400, 0, 100, 400);
+		mainPanel.setBounds(0, 0, 400, 400);
 
 		add(mainPanel);
 	}
@@ -50,7 +50,7 @@ public class ViewPanel extends AbstractPanel {
 		menuPanel = new JPanel();
 
 		menuPanel.setBackground(new Color(100, 100, 0));
-		menuPanel.setBounds(0, 0, 400, 400);
+		menuPanel.setBounds(400, 0, 100, 400);
 
 		add(menuPanel);
 	}

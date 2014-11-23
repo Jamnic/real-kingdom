@@ -137,7 +137,8 @@ public final class BoardIterator implements Iterator<Field>, Iterable<Field>, Se
 			// Get another Field in row.
 
 			setCurrentYPositionOfIterator(currentYPositionOfIterator + 1);
-			return array.get(currentXPositionOfIterator).getFields().get(currentYPositionOfIterator);
+			List<Field> fields2 = array.get(currentXPositionOfIterator).getFields();
+			return fields2.get(currentYPositionOfIterator);
 		}
 	}
 
